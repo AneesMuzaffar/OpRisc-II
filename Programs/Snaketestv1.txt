@@ -1,0 +1,50 @@
+$snakeLength 5
+$snakeHeadx 15 0401
+$snakeHeady 15 0402
+$snakeStored 0401
+$color ffff
+$headX  
+$play 0070
+org
+LDR R7 $play
+#getInput
+INR
+MOV R6 R0
+IEQ R6 R7
+JPE #getInput
+LDR R7 $snakeLength
+#here
+IEQ R6 R7
+JPE #there
+LDR R2 $snakeHeadx
+LDR R3 $snakeStored
+IEQ R5 R6
+JPE #idhar
+#kar
+INC R2
+JMP #kar
+#idhar
+INC R3
+INC R3
+MOV R0 R2
+MOV R1 R3
+STD
+DEC R3
+INC R6
+JMP #here
+#there
+
+
+
+MOV R4 R2
+INC R4
+MOV R5 R3
+MOV
+
+
+LDR R5 $color
+MOV R0 R5
+MOV R1 R3
+
+
+

@@ -1,0 +1,132 @@
+$snakeX 15 
+$snakeY 15 
+$xLoc 401
+$yLoc 402
+$play 0070
+$right 0
+$up 1
+$left 2
+$down 3
+$rowLength 30
+$graphicAddress 800
+$color ffff
+$dKey 64
+$sKey 73
+$aKey 61
+$wKey 77
+org
+LDR R6 $snakeX
+LDR R5 $xLoc
+MOV R0 R6
+MOV R1 R5
+STD
+LDR R6 $snakeY
+LDR R5 $yLoc
+MOV R0 R6
+MOV R1 R5
+STD
+CLR R0
+CLR R1
+CLR R5
+CLR R6
+LDR R7 $play
+#getInput
+INR
+MOV R6 R0
+IEQ R6 R7
+JPE #getInput
+CRF
+CLR R0
+CLR R1
+CLR R2
+CLR R3
+CLR R4
+CLR R5
+CLR R6
+CLR R7
+#frameStart
+CLR R0
+INR
+MOV R6 R0
+IEQ R6 R7
+JPE #lagsaKaaras
+JMP #inputAaya
+#lagsaKaaras
+LDR R2 $xLoc
+LDR R3 $yLoc
+LDR R6 $right
+IEQ R6 R5
+JPE #rightJa
+LDR R6 $up
+IEQ R6 R5
+JPE #upJa
+LDR R6 $left
+IEQ R6 R5
+JPE #leftJa
+LDR R6 $down
+IEQ R6 R5
+JPE #downJa
+#rightJa
+INC R2
+JMP #idhar
+#upJa
+DEC R3
+JMP #idhar
+#leftJa
+DEC R2
+JMP #idhar
+#downJa
+INC R3
+JMP #idhar
+#idhar
+STR R2 $xLoc
+STR R3 $yLoc
+CLR R4
+CLR R7
+LDR R1 $rowLength
+#mulStart
+ADD R4 R4 R2
+DEC R1
+IEQ R1 R7
+JPE #addStart
+JMP #mulStart
+#addStart
+LDR R7 $graphicAddress
+ADD R4 R4 R3
+ADD R4 R4 R7
+LDR R7 $color
+MOV R0 R7
+MOV R1 R5
+STD
+JMP #frameStart
+#inputAaya
+LDR R7 $dKey
+IEQ R7 R6
+JPE #D
+LDR R7 $sKey
+IEQ R7 R6
+JPE #S
+LDR R7 $aKey
+IEQ R7 R6
+JPE #A
+LDR R7 $wKey
+IEQ R7 R6
+JPE #W
+#D
+CLR R5
+JMP lagsaKaaras
+#S
+CLR R5
+INC R5
+INC R5
+INC R5
+JMP lagsaKaaras
+#A
+CLR R5
+INC R5
+INC R5
+JMP lagsaKaaras
+#W
+CLR R5
+INC R5
+JMP lagsaKaaras

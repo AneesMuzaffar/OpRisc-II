@@ -1,0 +1,25 @@
+$a 5
+$b 1
+org
+LDR R5 $a
+LDR R3 $b
+SUB R7 R5 R3
+MOV R2 R5
+#s1
+IEQ R7 R3
+JPE #e1
+#s2
+IEQ R3 R7
+JPE #e2
+ADD R5 R5 R2
+INC R3
+JMP #s2
+#e2
+MOV R2 R5
+LDR R3 $b
+DEC R7
+JMP #s1
+#e1
+MOV R0 R5
+OTR
+HLT
